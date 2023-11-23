@@ -5,14 +5,31 @@ export default function index({ setMember }) {
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newMember = {
       first_name: firstName,
       last_name: lastName,
       age: age,
     };
-    setMember(newMember);
+    try {
+      const response = await fetch("http://localhost:3001", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newMember),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMember(data);
+      } else {
+        console.error("Failed to add a new Member");
+      }
+    } catch (error) {
+      console.error("ERROR from FRONTEND/INPUT:", error);
+    }
   };
 
   return (

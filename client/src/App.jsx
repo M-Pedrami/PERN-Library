@@ -15,7 +15,8 @@ function App() {
       console.log('ERROR CLIENT', error)
     }
    }
-  }, [])
+   getData()
+  }, [member])
   console.log(member)
   return (
   <>
