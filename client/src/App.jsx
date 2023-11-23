@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Input from "./components/InputFields";
 
 function App() {
   const[data, setData] = useState([]);
+  const [member, setMember] = useState({})
   useEffect(()=>{
    const getData = async () =>{
     try {
@@ -13,10 +15,17 @@ function App() {
       console.log('ERROR CLIENT', error)
     }
    }
-   getData()
   }, [])
-  console.log(data)
-  return <h1>Library</h1>;
+  console.log(member)
+  return (
+  <>
+  <h1>Library</h1>
+  <Input setMember = {setMember} member = {member}/>
+  {data.map(member =>(
+    <p>{member.first_name} {member.last_name} Age: {member.age}</p>
+  ))}
+  </>
+  )
 }
 
 export default App;
