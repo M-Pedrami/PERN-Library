@@ -27,6 +27,7 @@ function App() {
     
     <p>{book.title} by {book.author}</p>
     <p>{book.description}</p>
+    <img src={book.cover_url} alt={book.title} style={{width:250}} />
     </>
   ))}
   </>
