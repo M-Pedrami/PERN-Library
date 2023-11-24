@@ -5,7 +5,8 @@ export default function index({ setbook }) {
   const [author, setauthor] = useState("");
   const [category, setCategory] = useState();
   const [description, setDescription] = useState("");
-  const [cover, setCover] = useState("")
+  const [cover, setCover] = useState("");
+  const [date, setDate] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +15,8 @@ export default function index({ setbook }) {
       author: author,
       category: category,
       description: description,
-      cover_url : cover
+      cover_url: cover,
+      published_at: date,
     };
     try {
       const response = await fetch("http://localhost:3001", {
@@ -85,6 +87,15 @@ export default function index({ setbook }) {
         placeholder="Upload the cover photo"
         onChange={(e) => {
           setCover(e.target.value);
+        }}
+      />
+      <label htmlFor="published">Publication Date</label>
+      <input
+        type="date"
+        name="Published"
+        id="Published"
+        onChange={(e) => {
+          setDate(e.target.value);
         }}
       />
       <button type="submit">Submit</button>

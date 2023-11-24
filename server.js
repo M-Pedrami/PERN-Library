@@ -17,11 +17,11 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  const { title, author, category, description, cover_url } = req.body;
+  const { title, author, category, description, cover_url, published_at } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO books (title, author, category, description, cover_url) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [title, author, category, description, cover_url]
+      "INSERT INTO books (title, author, category, description, cover_url, published_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [title, author, category, description, cover_url, published_at]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
