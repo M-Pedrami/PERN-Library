@@ -4,7 +4,7 @@ import Input from "./components/InputFields";
 
 function App() {
   const[data, setData] = useState([]);
-  const [member, setMember] = useState({})
+  const [book, setbook] = useState({})
   useEffect(()=>{
    const getData = async () =>{
     try {
@@ -16,14 +16,14 @@ function App() {
     }
    }
    getData()
-  }, [member])
-  console.log(member)
+  }, [book])
+  console.log(book)
   return (
   <>
   <h1>Library</h1>
-  <Input setMember = {setMember} member = {member}/>
-  {data.map(member =>(
-    <p>{member.first_name} {member.last_name} Age: {member.age}</p>
+  <Input setbook = {setbook} book = {book}/>
+  {data.map(book =>(
+    <p>{book.title} by {book.author}</p>
   ))}
   </>
   )

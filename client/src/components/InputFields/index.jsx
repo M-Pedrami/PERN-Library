@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-export default function index({ setMember }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState();
+export default function index({ setbook }) {
+  const [title, settitle] = useState("");
+  const [author, setauthor] = useState("");
+  const [category, setCategory] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newMember = {
-      first_name: firstName,
-      last_name: lastName,
-      age: age,
+    const newbook = {
+      title: title,
+      author: author,
+      category: category,
     };
     try {
       const response = await fetch("http://localhost:3001", {
@@ -18,14 +18,14 @@ export default function index({ setMember }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newMember),
+        body: JSON.stringify(newbook),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setMember(data);
+        setbook(data);
       } else {
-        console.error("Failed to add a new Member");
+        console.error("Failed to add a new book");
       }
     } catch (error) {
       console.error("ERROR from FRONTEND/INPUT:", error);
@@ -34,33 +34,33 @@ export default function index({ setMember }) {
 
   return (
     <form action="submit" onSubmit={handleSubmit}>
-      <label htmlFor="name">First Name</label>
+      <label htmlFor="title">Book Title</label>
       <input
         type="text"
-        name="name"
-        id="name"
-        placeholder="First Name"
+        name="title"
+        id="title"
+        placeholder="Book Title"
         onChange={(e) => {
-          setFirstName(e.target.value);
+          settitle(e.target.value);
         }}
       />
-      <label htmlFor="LastName">Last Name</label>
+      <label htmlFor="author">Author</label>
       <input
         type="text"
-        name="name"
-        id="name"
-        placeholder="Last Name"
+        name="author"
+        id="author"
+        placeholder="Author"
         onChange={(e) => {
-          setLastName(e.target.value);
+          setauthor(e.target.value);
         }}
       />
-      <label htmlFor="age">Age</label>
+      <label htmlFor="category">Category</label>
       <input
-        type="number"
-        name="age"
-        id="age"
+        type="text"
+        name="category"
+        id="category"
         onChange={(e) => {
-          setAge(e.target.value);
+          setCategory(e.target.value);
         }}
       />
       <button type="submit">Submit</button>

@@ -11,17 +11,17 @@ const pool = require("./Database/ElephantSQL");
 
 app.get("/", (req, res) => {
   pool
-    .query("SELECT * FROM users;")
+    .query("SELECT * FROM books;")
     .then((data) => res.json(data))
     .catch((err) => res.status(500).json(err));
 });
 
 app.post("/", async (req, res) => {
-  const { first_name, last_name, age } = req.body;
+  const { title, author, category } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO users (first_name, last_name, age) VALUES ($1, $2, $3) RETURNING *",
-      [first_name, last_name, age]
+      "INSERT INTO books (title, author, category) VALUES ($1, $2, $3) RETURNING *",
+      [title, author, category]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
