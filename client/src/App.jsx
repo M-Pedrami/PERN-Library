@@ -23,7 +23,11 @@ function App() {
   <h1>Library</h1>
   <Input setbook = {setbook} book = {book}/>
   {data.map(book =>(
+    <>
+    
     <p>{book.title} by {book.author}</p>
+    <p>{book.description}</p>
+    </>
   ))}
   </>
   )

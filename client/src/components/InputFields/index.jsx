@@ -4,6 +4,7 @@ export default function index({ setbook }) {
   const [title, settitle] = useState("");
   const [author, setauthor] = useState("");
   const [category, setCategory] = useState();
+  const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,6 +12,7 @@ export default function index({ setbook }) {
       title: title,
       author: author,
       category: category,
+      description: description
     };
     try {
       const response = await fetch("http://localhost:3001", {
@@ -52,6 +54,16 @@ export default function index({ setbook }) {
         placeholder="Author"
         onChange={(e) => {
           setauthor(e.target.value);
+        }}
+      />
+      <label htmlFor="description">Description</label>
+      <textarea
+        type="text"
+        name="description"
+        id="description"
+        placeholder="description"
+        onChange={(e) => {
+          setDescription(e.target.value);
         }}
       />
       <label htmlFor="category">Category</label>
