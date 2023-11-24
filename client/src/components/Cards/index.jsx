@@ -6,9 +6,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function index({book, formatDate}) {
+export default function index({book}) {
+  //This functions reformats the date returned from the book.published_at
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card sx={{ maxWidth: 345 }} id='Card' >
       <CardMedia
         component="img"
         alt="green iguana"

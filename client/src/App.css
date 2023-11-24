@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: rgb(239, 232, 232);
 }
 
 .bookContainer{
@@ -10,4 +11,27 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto ;
   gap: 1rem;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+nav ul{
+  display: flex;
+}
+nav ul li{
+  list-style:none ;
+  margin-right: 1rem;
+}
+
+#Card {
+ transition: 0.4s ease;
+ cursor: pointer;
+}
+
+#Card:hover{
+  transform: scale(0.96);
 }

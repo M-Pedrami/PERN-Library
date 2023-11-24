@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Input from "./components/InputFields";
-import Card from "./components/Cards";
+import Home from "./components/Home";
+
+import { Route, Routes, NavLink } from "react-router-dom";
 
 function App() {
   const [data, setData] = useState([]);
   const [book, setbook] = useState({});
-  //This functions reformats the date returned from the book.published_at
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -28,12 +25,24 @@ function App() {
   console.log(book);
   return (
     <>
-      <Input setbook={setbook} book={book} />
-      <div className="bookContainer">
-        {data.map((book) => (
-          <Card book={book} formatDate={formatDate} />
-        ))}
-      </div>
+      <nav>
+        <h1>LOGO</h1>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/AddBook">Add Book</NavLink>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route
+          path="/AddBook"
+          element={<Input setbook={setbook} book={book} />}
+        />
+        <Route path="/" element={<Home data={data} />}></Route>
+      </Routes>
     </>
   );
 }
