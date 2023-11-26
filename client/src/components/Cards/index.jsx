@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {Link} from 'react-router-dom'
 
 export default function index({book}) {
   //This functions reformats the date returned from the book.published_at
@@ -32,7 +33,7 @@ export default function index({book}) {
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small"><Link to={`/Home/${book.id}`}>Learn More</Link></Button>
       </CardActions>
     </Card>
   );

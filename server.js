@@ -16,6 +16,15 @@ app.get("/", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
+app.get("/Home/:ID", (req, res) => {
+  const {ID} = req.params;
+  
+  pool
+    .query("SELECT * FROM books where ID=$1;", [ID])
+    .then((data) => res.json(data))
+    .catch((err) => res.status(500).json(err));
+});
+
 app.post("/", async (req, res) => {
   const { title, author, category, description, cover_url, published_at } = req.body;
   try {

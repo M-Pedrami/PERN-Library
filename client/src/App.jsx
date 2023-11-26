@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Input from "./components/InputFields";
 import Home from "./components/Home";
+import BookPage from "./components/BookPage"
 
-import { Route, Routes, NavLink } from "react-router-dom";
+
+import { Route, Routes, NavLink,} from "react-router-dom";
 
 function App() {
   const [data, setData] = useState([]);
@@ -42,6 +44,7 @@ function App() {
           element={<Input setbook={setbook} book={book} />}
         />
         <Route path="/" element={<Home data={data} />}></Route>
+        <Route path="/Home/:ID" element = {<BookPage/>} />
       </Routes>
     </>
   );
