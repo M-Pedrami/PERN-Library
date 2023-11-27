@@ -1,36 +1,22 @@
-import { useState } from "react";
-import './styles.css'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import "./styles.css";
 
 export default function index({ setbook }) {
-  const [title, settitle] = useState("");
-  const [author, setauthor] = useState("");
-  const [category, setCategory] = useState();
-  const [description, setDescription] = useState("");
-  const [cover, setCover] = useState("");
-  const [date, setDate] = useState();
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const newbook = {
-      title: title,
-      author: author,
-      category: category,
-      description: description,
-      cover_url: cover,
-      published_at: date,
-    };
+  const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:3001", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newbook),
+      const response = await axios.post("http://localhost:3001", data, {
+        headers: { "Content-Type": "application/json" },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setbook(data);
+      if (response.status === 201) {
+        setbook(response.data);
+
+        navigate("/");
       } else {
         console.error("Failed to add a new book");
       }
@@ -40,16 +26,14 @@ export default function index({ setbook }) {
   };
 
   return (
-    <form action="submit" onSubmit={handleSubmit}>
+    <form action="submit" onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="title">Book Title</label>
       <input
         type="text"
         name="title"
         id="title"
         placeholder="Book Title"
-        onChange={(e) => {
-          settitle(e.target.value);
-        }}
+        {...register("title")}
       />
       <label htmlFor="author">Author</label>
       <input
@@ -57,9 +41,7 @@ export default function index({ setbook }) {
         name="author"
         id="author"
         placeholder="Author"
-        onChange={(e) => {
-          setauthor(e.target.value);
-        }}
+        {...register("author")}
       />
       <label htmlFor="description">Description</label>
       <textarea
@@ -67,18 +49,14 @@ export default function index({ setbook }) {
         name="description"
         id="description"
         placeholder="description"
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
+        {...register("description")}
       />
       <label htmlFor="category">Category</label>
       <input
         type="text"
         name="category"
         id="category"
-        onChange={(e) => {
-          setCategory(e.target.value);
-        }}
+        {...register("category")}
       />
       <label htmlFor="Cover Photo">Cover Photo</label>
       <input
@@ -86,18 +64,14 @@ export default function index({ setbook }) {
         name="Cover Photo"
         id="Cover Photo"
         placeholder="Upload the cover photo"
-        onChange={(e) => {
-          setCover(e.target.value);
-        }}
+        {...register("cover_url")}
       />
       <label htmlFor="published">Publication Date</label>
       <input
         type="date"
         name="Published"
         id="Published"
-        onChange={(e) => {
-          setDate(e.target.value);
-        }}
+        {...register("published_at")}
       />
       <button type="submit">Submit</button>
     </form>
